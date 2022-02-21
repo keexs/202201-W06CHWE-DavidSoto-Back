@@ -27,4 +27,17 @@ const getRobotto = async (req, res, next) => {
   }
 };
 
-module.exports = { listRobottos, getRobotto };
+const createRobotto = async (req, res, next) => {
+  const robotto = req.body;
+  try {
+    const newRobotto = await Robotto.create(robotto);
+    res.status(201);
+    res.json(newRobotto);
+  } catch (error) {
+    error.message = "Bad request leand how to create a Robotto noob";
+    error.code = 400;
+    next(error);
+  }
+};
+
+module.exports = { listRobottos, getRobotto, createRobotto };
