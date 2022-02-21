@@ -1,5 +1,5 @@
-const debug = require("debug")("robottos:root");
 require("dotenv").config();
+const debug = require("debug")("robottos:root");
 const chalk = require("chalk");
 const connectDataBase = require("./db");
 const startServer = require("./server");
