@@ -61,4 +61,28 @@ const updateRobotto = async (req, res, next) => {
   }
 };
 
-module.exports = { listRobottos, getRobotto, createRobotto, updateRobotto };
+const deleteRobotto = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const toDeleteRobotto = Robotto.findByIdAndDelete(id);
+    if (toDeleteRobotto) {
+      res.json(toDeleteRobotto.id);
+    }
+    const error = new Error("Robotto or ID not found");
+    error.code = 404;
+    next(error);
+  } catch (error) {
+    error.message = "Bad request trying to delete a robotto";
+    error.code = 400;
+    next(error);
+  }
+};
+
+module.exports = {
+  listRobottos,
+  getRobotto,
+  createRobotto,
+  updateRobotto,
+  deleteRobotto,
+};
